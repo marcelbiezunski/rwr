@@ -26,6 +26,7 @@ visible = false
 mesh = SubResource("BoxMesh_jk6ut")
 
 [node name="Sketchfab_Scene" parent="XROrigin3D/LeftController" instance=ExtResource("2_noarx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1219099, 0, 0)
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
@@ -36,6 +37,7 @@ visible = false
 mesh = SubResource("BoxMesh_xhnp3")
 
 [node name="Sketchfab_Scene" parent="XROrigin3D/RightController" instance=ExtResource("2_noarx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5615232, -0.023555756, 0.027036667)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
