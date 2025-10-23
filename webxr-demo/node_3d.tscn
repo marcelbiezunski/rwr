@@ -15,11 +15,14 @@ script = ExtResource("1_61lph")
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(-0.006667137, -0.9999777, 0, 0.9999777, -0.006667137, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="LeftController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"left_hand"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftController"]
+transform = Transform3D(-0.006667137, -0.9999777, 0, 0.9999777, -0.006667137, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 mesh = SubResource("BoxMesh_jk6ut")
 
 [node name="Sketchfab_Scene" parent="XROrigin3D/LeftController" instance=ExtResource("2_noarx")]
@@ -28,6 +31,8 @@ mesh = SubResource("BoxMesh_jk6ut")
 tracker = &"right_hand"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController"]
+transform = Transform3D(-0.006667137, -0.9999777, 0, 0.9999777, -0.006667137, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 mesh = SubResource("BoxMesh_xhnp3")
 
 [node name="Sketchfab_Scene" parent="XROrigin3D/RightController" instance=ExtResource("2_noarx")]
