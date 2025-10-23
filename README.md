@@ -1,1 +1,2 @@
 # rwr
+opis projektu
