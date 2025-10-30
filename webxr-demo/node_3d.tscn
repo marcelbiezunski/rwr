@@ -20,21 +20,21 @@ tracker = &"left_hand"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftController"]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 mesh = SubResource("SphereMesh_noarx")
 
 [node name="Sketchfab_Scene" parent="XROrigin3D/LeftController" instance=ExtResource("2_noarx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.94440544, 0, 0)
-visible = false
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController"]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 mesh = SubResource("BoxMesh_a0tk4")
 
 [node name="Sketchfab_Scene" parent="XROrigin3D/RightController" instance=ExtResource("2_noarx")]
-visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
