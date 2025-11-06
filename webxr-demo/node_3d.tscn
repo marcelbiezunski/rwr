@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://lwjpy1mxgdla"]
+[gd_scene load_steps=6 format=3 uid="uid://lwjpy1mxgdla"]
 
 [ext_resource type="Script" uid="uid://dc1lu38185dod" path="res://node_3d.gd" id="1_61lph"]
 [ext_resource type="PackedScene" uid="uid://b8sqplh0apc1y" path="res://assets/models/rigged_hand.glb" id="2_noarx"]
@@ -6,6 +6,9 @@
 [sub_resource type="SphereMesh" id="SphereMesh_noarx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_a0tk4"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_noarx"]
+size = Vector2(20, 20)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_61lph")
@@ -43,3 +46,8 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.0005328655, 0, 0)
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Enter VR"
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+mesh = SubResource("PlaneMesh_noarx")
