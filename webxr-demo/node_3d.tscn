@@ -1,11 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://lwjpy1mxgdla"]
+[gd_scene load_steps=14 format=3 uid="uid://lwjpy1mxgdla"]
 
 [ext_resource type="Script" uid="uid://dc1lu38185dod" path="res://node_3d.gd" id="1_61lph"]
 [ext_resource type="PackedScene" uid="uid://b8sqplh0apc1y" path="res://assets/models/rigged_hand.glb" id="2_noarx"]
+[ext_resource type="Script" uid="uid://dcmakcalqcv6a" path="res://teleport.gd" id="3_a0tk4"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_noarx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_a0tk4"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a0tk4"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.05
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_noarx"]
 size = Vector2(20, 20)
@@ -51,6 +57,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
+script = ExtResource("3_a0tk4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController"]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
@@ -59,6 +66,13 @@ mesh = SubResource("BoxMesh_a0tk4")
 
 [node name="Sketchfab_Scene" parent="XROrigin3D/RightController" instance=ExtResource("2_noarx")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.0005328655, 0, 0)
+
+[node name="teleportRay" type="RayCast3D" parent="XROrigin3D/RightController"]
+target_position = Vector3(0, 0, -10)
+
+[node name="teleportMarker" type="MeshInstance3D" parent="XROrigin3D/RightController"]
+visible = false
+mesh = SubResource("CylinderMesh_a0tk4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
