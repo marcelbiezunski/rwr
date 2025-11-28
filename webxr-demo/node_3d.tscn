@@ -67,10 +67,11 @@ mesh = SubResource("BoxMesh_a0tk4")
 [node name="Sketchfab_Scene" parent="XROrigin3D/RightController" instance=ExtResource("2_noarx")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
-[node name="teleportRay" type="RayCast3D" parent="XROrigin3D/RightController"]
+[node name="TeleportRay" type="RayCast3D" parent="XROrigin3D/RightController"]
 target_position = Vector3(0, 0, -10)
 
-[node name="teleportMarker" type="MeshInstance3D" parent="XROrigin3D/RightController"]
+[node name="TeleportMarker" type="MeshInstance3D" parent="XROrigin3D/RightController"]
+top_level = true
 visible = false
 mesh = SubResource("CylinderMesh_a0tk4")
 
@@ -118,3 +119,5 @@ light_energy = 1.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a0tk4")
+
+[connection signal="button_released" from="XROrigin3D/RightController" to="XROrigin3D/RightController" method="_on_right_controller_button_released"]
