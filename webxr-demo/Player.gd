@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
     right = right.normalized()
 
     # stick.y zwykle u góry = -1
-    var move_dir: Vector3 = (right * stick.x) + (forward * (-stick.y))
+    var move_dir: Vector3 = (right * stick.x) + (forward * (stick.y))
 
     if move_dir.length() > 0.0:
         move_dir = move_dir.normalized()
