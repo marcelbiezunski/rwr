@@ -39,10 +39,9 @@ height = 1.6
 
 [sub_resource type="BoxMesh" id="BoxMesh_a0tk4"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_a0tk4"]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.05
+[sub_resource type="SphereMesh" id="SphereMesh_wc5p8"]
+radius = 0.1
+height = 0.2
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_61lph")
@@ -131,6 +130,7 @@ visible = false
 
 [node name="Sketchfab_Scene2" parent="Player/XROrigin3D/LeftController" instance=ExtResource("5_jsk3o")]
 transform = Transform3D(-1.7484555e-09, 0.04, 0, -0.010352762, -4.5253365e-10, 0.03863703, 0.03863703, 1.6888784e-09, 0.010352762, 0.13, 0.06, 0)
+visible = false
 
 [node name="RightController" type="XRController3D" parent="Player/XROrigin3D"]
 tracker = &"right_hand"
@@ -147,6 +147,7 @@ visible = false
 
 [node name="Sketchfab_Scene2" parent="Player/XROrigin3D/RightController" instance=ExtResource("5_jka67")]
 transform = Transform3D(-0.19696155, 0.034729637, -1.7484556e-08, 0.034729637, 0.19696155, 0, 1.7218925e-08, -3.0361613e-09, -0.2, 0, 0.06, 0)
+visible = false
 
 [node name="TeleportRay" type="RayCast3D" parent="Player/XROrigin3D/RightController"]
 target_position = Vector3(0, 0, -10)
@@ -154,6 +155,6 @@ target_position = Vector3(0, 0, -10)
 [node name="TeleportMarker" type="MeshInstance3D" parent="Player/XROrigin3D/RightController"]
 top_level = true
 visible = false
-mesh = SubResource("CylinderMesh_a0tk4")
+mesh = SubResource("SphereMesh_wc5p8")
 
 [connection signal="button_released" from="Player/XROrigin3D/RightController" to="Player/XROrigin3D/RightController" method="_on_right_controller_button_released"]
