@@ -73,7 +73,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, -4)
 mesh = SubResource("CylinderMesh_noarx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Wierza orientacyjna"]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_a0tk4")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="Level"]
@@ -84,7 +83,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 mesh = SubResource("BoxMesh_noarx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D2"]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_a0tk4")
 
 [node name="StaticBody3Dlaptop" type="StaticBody3D" parent="Level"]
@@ -95,7 +94,7 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.7, 0)
 mesh = SubResource("BoxMesh_noarx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3Dlaptop"]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_a0tk4")
 
 [node name="Sketchfab_Scene" parent="Level" instance=ExtResource("2_wc5p8")]
@@ -113,6 +112,7 @@ environment = SubResource("Environment_a0tk4")
 script = ExtResource("2_r3fl7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_jka67")
 
 [node name="XROrigin3D" type="XROrigin3D" parent="Player"]
