@@ -116,7 +116,7 @@ light_color = Color(0.79814124, 0.0329223, 0.60632116, 1)
 light_energy = 1.5
 
 [node name="SkyText" type="Label3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 25)
 pixel_size = 0.01
 billboard = 1
 modulate = Color(1, 0, 1, 1)
