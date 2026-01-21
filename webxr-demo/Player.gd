@@ -17,84 +17,84 @@ var snap_turn_ready := true
 
 
 func _physics_process(delta: float) -> void:
-    # --- grawitacja ---
-    if not is_on_floor():
-        velocity.y -= gravity * delta
-    else:
-        velocity.y = -0.1
+	# --- grawitacja ---
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	else:
+		velocity.y = -0.1
 
-    # --- gałka (z fallback) ---
-    var stick := _get_left_stick()
+	# --- gałka (z fallback) ---
+	var stick := _get_left_stick()
 
-    if stick.length() < deadzone:
-        stick = Vector2.ZERO
+	if stick.length() < deadzone:
+		stick = Vector2.ZERO
 
-    # --- kierunek względem kamery ---
-    var cam_basis: Basis = xr_camera.global_transform.basis
-    var forward: Vector3 = -cam_basis.z
-    var right: Vector3 = cam_basis.x
-    forward.y = 0.0
-    right.y = 0.0
-    forward = forward.normalized()
-    right = right.normalized()
+	# --- kierunek względem kamery ---
+	var cam_basis: Basis = xr_camera.global_transform.basis
+	var forward: Vector3 = -cam_basis.z
+	var right: Vector3 = cam_basis.x
+	forward.y = 0.0
+	right.y = 0.0
+	forward = forward.normalized()
+	right = right.normalized()
 
-    # stick.y zwykle u góry = -1
-    var move_dir: Vector3 = (right * stick.x) + (forward * (stick.y))
+	# stick.y zwykle u góry = -1
+	var move_dir: Vector3 = (right * stick.x) + (forward * (stick.y))
 
-    if move_dir.length() > 0.0:
-        move_dir = move_dir.normalized()
-        velocity.x = move_dir.x * move_speed
-        velocity.z = move_dir.z * move_speed
-    else:
-        velocity.x = 0.0
-        velocity.z = 0.0
+	if move_dir.length() > 0.0:
+		move_dir = move_dir.normalized()
+		velocity.x = move_dir.x * move_speed
+		velocity.z = move_dir.z * move_speed
+	else:
+		velocity.x = 0.0
+		velocity.z = 0.0
 
-    move_and_slide()
-    _handle_snap_turn()
+	move_and_slide()
+	_handle_snap_turn()
 
 
 func _get_left_stick() -> Vector2:
-    # Najczęściej działa:
-    var v := left_controller.get_vector2("thumbstick")
-    if v != Vector2.ZERO:
-        return v
+	# Najczęściej działa:
+	var v := left_controller.get_vector2("thumbstick")
+	if v != Vector2.ZERO:
+		return v
 
-    # Czasem w WebXR/konfiguracjach:
-    v = left_controller.get_vector2("primary")
-    if v != Vector2.ZERO:
-        return v
+	# Czasem w WebXR/konfiguracjach:
+	v = left_controller.get_vector2("primary")
+	if v != Vector2.ZERO:
+		return v
 
-    v = left_controller.get_vector2("trackpad")
-    return v
+	v = left_controller.get_vector2("trackpad")
+	return v
 
 
 func _get_right_stick() -> Vector2:
-    var v := right_controller.get_vector2("thumbstick")
-    if v != Vector2.ZERO:
-        return v
+	var v := right_controller.get_vector2("thumbstick")
+	if v != Vector2.ZERO:
+		return v
 
-    v = right_controller.get_vector2("primary")
-    if v != Vector2.ZERO:
-        return v
+	v = right_controller.get_vector2("primary")
+	if v != Vector2.ZERO:
+		return v
 
-    return right_controller.get_vector2("trackpad")
+	return right_controller.get_vector2("trackpad")
 
 
 func _handle_snap_turn():
-    var stick := _get_right_stick()
+	var stick := _get_right_stick()
 
-    # jeśli gałka wróciła do środka → odblokuj snap
-    if abs(stick.x) < 0.2:
-        snap_turn_ready = true
-        return
+	# jeśli gałka wróciła do środka → odblokuj snap
+	if abs(stick.x) < 0.2:
+		snap_turn_ready = true
+		return
 
-    if not snap_turn_ready:
-        return
+	if not snap_turn_ready:
+		return
 
-    if stick.x > snap_turn_deadzone:
-        rotate_y(deg_to_rad(-snap_turn_angle))
-        snap_turn_ready = false
+	if stick.x > snap_turn_deadzone:
+		rotate_y(deg_to_rad(-snap_turn_angle))
+		snap_turn_ready = false
 
-    elif stick.x < -snap_turn_deadzone:
-        rotate_y(deg_to_rad(snap_turn_angle))
-        snap_turn_ready = false
+	elif stick.x < -snap_turn_deadzone:
+		rotate_y(deg_to_rad(snap_turn_angle))
+		snap_turn_ready = false
