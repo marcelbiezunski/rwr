@@ -7,13 +7,28 @@ extends CharacterBody3D
 @export var snap_turn_angle := 45.0        # stopnie
 @export var snap_turn_deadzone := 0.7
 
-var snap_turn_ready := true
+# Reset na spawn (lewy spust)
+@export var reset_button_name: String = "trigger_click"  # zmień jeśli konsola pokaże inną nazwę
 
+var snap_turn_ready := true
 
 @onready var xr_origin: XROrigin3D = $XROrigin3D
 @onready var xr_camera: XRCamera3D = $XROrigin3D/XRCamera3D
 @onready var left_controller: XRController3D = $XROrigin3D/LeftController
 @onready var right_controller: XRController3D = $XROrigin3D/RightController
+
+var _spawn_pos: Vector3
+var _spawn_yaw: float
+
+
+func _ready() -> void:
+	# Zapamiętaj spawn jako startową pozycję Playera
+	_spawn_pos = global_position
+	_spawn_yaw = global_rotation.y
+
+	# Podepnij sygnał z lewego kontrolera (reset)
+	if left_controller and not left_controller.button_released.is_connected(_on_left_controller_button_released):
+		left_controller.button_released.connect(_on_left_controller_button_released)
 
 
 func _physics_process(delta: float) -> void:
@@ -80,7 +95,7 @@ func _get_right_stick() -> Vector2:
 	return right_controller.get_vector2("trackpad")
 
 
-func _handle_snap_turn():
+func _handle_snap_turn() -> void:
 	var stick := _get_right_stick()
 
 	# jeśli gałka wróciła do środka → odblokuj snap
@@ -98,3 +113,36 @@ func _handle_snap_turn():
 	elif stick.x < -snap_turn_deadzone:
 		rotate_y(deg_to_rad(snap_turn_angle))
 		snap_turn_ready = false
+
+
+# =========================
+# RESET NA SPAWN (LEFT TRIGGER)
+# =========================
+
+func _on_left_controller_button_released(button_name: String) -> void:
+	print("LEFT released: ", button_name)
+	if button_name == reset_button_name:
+		reset_to_spawn()
+
+
+func reset_to_spawn() -> void:
+	# Ustawiamy Playera tak, by HMD (kamera) wróciła na spawn w osi XZ
+	var origin_pos := xr_origin.global_position
+	var cam_pos := xr_camera.global_position
+
+	var offset_x := cam_pos.x - origin_pos.x
+	var offset_z := cam_pos.z - origin_pos.z
+
+	global_position = Vector3(
+		_spawn_pos.x - offset_x,
+		_spawn_pos.y,
+		_spawn_pos.z - offset_z
+	)
+
+	# Opcjonalnie: przywróć obrót (yaw) na startowy
+	var r := global_rotation
+	r.y = _spawn_yaw
+	global_rotation = r
+
+	# Wyzeruj prędkość, żeby po resecie nie "ciągnęło" dalej
+	velocity = Vector3.ZERO
