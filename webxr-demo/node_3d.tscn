@@ -130,7 +130,7 @@ transform = Transform3D(-0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 visible = false
 
 [node name="Sketchfab_Scene2" parent="Player/XROrigin3D/LeftController" instance=ExtResource("5_jsk3o")]
-transform = Transform3D(-1.3113416e-09, 0.03, 0, -0.03, -1.3113416e-09, 0, 0, 0, 0.03, 0.13, 0.1, 0)
+transform = Transform3D(-1.7484555e-09, 0.04, 0, -0.010352762, -4.5253365e-10, 0.03863703, 0.03863703, 1.6888784e-09, 0.010352762, 0.13, 0.06, 0)
 
 [node name="RightController" type="XRController3D" parent="Player/XROrigin3D"]
 tracker = &"right_hand"
@@ -146,7 +146,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 visible = false
 
 [node name="Sketchfab_Scene2" parent="Player/XROrigin3D/RightController" instance=ExtResource("5_jka67")]
-transform = Transform3D(-0.175, 0, -1.5298985e-08, 0, 0.175, 0, 1.5298985e-08, 0, -0.175, 0, 0.05, 0)
+transform = Transform3D(-0.19696155, 0.034729637, -1.7484556e-08, 0.034729637, 0.19696155, 0, 1.7218925e-08, -3.0361613e-09, -0.2, 0, 0.06, 0)
 
 [node name="TeleportRay" type="RayCast3D" parent="Player/XROrigin3D/RightController"]
 target_position = Vector3(0, 0, -10)
