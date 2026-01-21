@@ -115,6 +115,16 @@ transform = Transform3D(0.66253453, -0.4719046, 0.58168215, 0.35462287, 0.881649
 light_color = Color(0.79814124, 0.0329223, 0.60632116, 1)
 light_energy = 1.5
 
+[node name="SkyText" type="Label3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 15)
+pixel_size = 0.01
+billboard = 1
+modulate = Color(1, 0, 1, 1)
+text = "Teleportacja - prawy trigger
+Poruszanie - lewa gałka
+Powrót na spawn - lewy trigger"
+font_size = 128
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a0tk4")
 
