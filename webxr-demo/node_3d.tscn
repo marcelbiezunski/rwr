@@ -122,6 +122,7 @@ billboard = 1
 modulate = Color(1, 0, 1, 1)
 text = "Teleportacja - prawy trigger
 Poruszanie - lewa gałka
+Obrót 45 stopni - prawa gałka
 Powrót na spawn - lewy trigger"
 font_size = 128
 
