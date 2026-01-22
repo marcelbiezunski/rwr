@@ -4,9 +4,17 @@ extends CharacterBody3D
 @export var gravity: float = 9.8
 @export var deadzone: float = 0.15
 
+@export var snap_turn_angle := 45.0        # stopnie
+@export var snap_turn_deadzone := 0.7
+
+var snap_turn_ready := true
+
+
 @onready var xr_origin: XROrigin3D = $XROrigin3D
 @onready var xr_camera: XRCamera3D = $XROrigin3D/XRCamera3D
 @onready var left_controller: XRController3D = $XROrigin3D/LeftController
+@onready var right_controller: XRController3D = $XROrigin3D/RightController
+
 
 func _physics_process(delta: float) -> void:
     # --- grawitacja ---
@@ -42,6 +50,8 @@ func _physics_process(delta: float) -> void:
         velocity.z = 0.0
 
     move_and_slide()
+    _handle_snap_turn()
+
 
 func _get_left_stick() -> Vector2:
     # Najczęściej działa:
@@ -56,3 +66,35 @@ func _get_left_stick() -> Vector2:
 
     v = left_controller.get_vector2("trackpad")
     return v
+
+
+func _get_right_stick() -> Vector2:
+    var v := right_controller.get_vector2("thumbstick")
+    if v != Vector2.ZERO:
+        return v
+
+    v = right_controller.get_vector2("primary")
+    if v != Vector2.ZERO:
+        return v
+
+    return right_controller.get_vector2("trackpad")
+
+
+func _handle_snap_turn():
+    var stick := _get_right_stick()
+
+    # jeśli gałka wróciła do środka → odblokuj snap
+    if abs(stick.x) < 0.2:
+        snap_turn_ready = true
+        return
+
+    if not snap_turn_ready:
+        return
+
+    if stick.x > snap_turn_deadzone:
+        rotate_y(deg_to_rad(-snap_turn_angle))
+        snap_turn_ready = false
+
+    elif stick.x < -snap_turn_deadzone:
+        rotate_y(deg_to_rad(snap_turn_angle))
+        snap_turn_ready = false
